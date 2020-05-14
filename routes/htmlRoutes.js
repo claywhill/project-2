@@ -5,8 +5,8 @@ module.exports = function(app) {
   app.get("/", function(req, res) {
     db.Todo.findAll({}).then(function(dbTodo) {
       res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
+        title: dbTodo.title,
+        category: dbTodo.category
       });
     });
   });
