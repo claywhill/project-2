@@ -11,7 +11,7 @@ module.exports = function(app) {
     });
   });
 
-  // Load example page and pass in an example by id
+  // Load todo page and pass in a todo by id
   app.get("/todo/:id", function(req, res) {
     db.Todo.findOne({ where: { id: req.params.id } }).then(function(dbTodo) {
       res.render("todo", {
