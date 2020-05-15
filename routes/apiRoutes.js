@@ -8,11 +8,24 @@ module.exports = function(app) {
       res.json(dbTodo);
     });
   });
+
   // Get a single Todo
   app.get("/api/todos/:id", function(req, res) {
     db.Todo.findOne({
       where: {
         id: req.params.id
+      }
+    })
+      .then(function(dbTodo) {
+        res.json(dbTodo);
+      });
+  });
+
+  // Get route for returning todos of a specific category
+  app.get("/api/totdos/category/:category", function(req, res) {
+    db.Post.findAll({
+      where: {
+        category: req.params.category
       }
     })
       .then(function(dbTodo) {
