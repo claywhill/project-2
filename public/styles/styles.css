@@ -1,3 +1,14 @@
+body {
+  background-color: black;
+}
+
+.jumbotron {
+  background-color: black;
+
+}
+h1 {
+color: cornsilk;
+}
 .col-md-4 {
   float: left;
   width: 33.33%;
@@ -15,136 +26,125 @@ img {
   width: 100%;
   height: 100%;
 }
+@import url(https://fonts.googleapis.com/css?family=Anton);
 
-@import url("https://fonts.googleapis.com/css?family=Luckiest+Guy");
-
-/* BODY */
-body {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-color: skyblue;
-  background-image: -webkit-linear-gradient(90deg, rgb(243, 241, 125) 0%, steelblue 100%);
-  background-attachment: fixed;
-  background-size: 100% 100%;
-  overflow: hidden;
-  font-family: "Luckiest Guy", cursive;
-  -webkit-font-smoothing: antialiased;
+body
+{
+    background: #000;
+}
+.TBYD-container
+{
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
 }
 
-::selection {
-  background: transparent;
+.TBYD
+{
+    font-family: 'Anton', sans-serif;
+    line-height: 1;
+
+    letter-spacing: -.07em;
+
+    color: #fff;
 }
 
-/* CLOUDS */
-body:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 0;
-  height: 0;
-  margin: auto;
-  border-radius: 100%;
-  background: transparent;
-  display: block;
-  box-shadow: 0 0 150px 100px rgba(255, 255, 255, 0.6),
-    200px 0 200px 150px rgba(255, 255, 255, 0.6),
-    -250px 0 300px 150px rgba(255, 255, 255, 0.6),
-    550px 0 300px 200px rgba(255, 255, 255, 0.6),
-    -550px 0 300px 200px rgba(255, 255, 255, 0.6);
+.die
+{
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    font-size: 100px;
+    line-height: 1;
+
+    margin-top: -11px;
+
+    -webkit-transition: all .3s ease-in-out;
+            transition: all .3s cubic-bezier(.190, 1.000, .220, 1.000) 3s;
+    -webkit-transform: translateX(-1000%);
+        -ms-transform: translateX(-1000%);
+            transform: translateX(-1000%);
+    letter-spacing: -1px;
+    text-transform: uppercase;
+
+    color: red;
 }
 
-/* JUMP */
-h1 {
-  cursor: default;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-  margin: auto;
-  display: block;
-  text-align: center;
+.animate .die
+{
+    -webkit-transform: translateX(0);
+        -ms-transform: translateX(0);
+            transform: translateX(0);
 }
 
-h1 span {
-  position: relative;
-  top: 10px;
-  display: inline-block;
-  -webkit-animation: bounce 0.3s ease infinite alternate;
-  font-size: 80px;
-  color: #fff;
-  text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
-    0 5px 0 #ccc, 0 6px 0 transparent, 0 7px 0 transparent, 0 8px 0 transparent,
-    0 9px 0 transparent, 0 10px 10px rgba(0, 0, 0, 0.4);
+span
+{
+    font-family: 'Anton', Helvetica, sans-serif;
+    font-size: 40px;
+
+    text-transform: uppercase;
+
+    opacity: 0;
+    color: #fff;
+
+    filter: alpha(opacity=0);
 }
 
-h1 span:nth-child(2) {
-  -webkit-animation-delay: 0.1s;
+.you
+{
+    -webkit-transition: all .3s cubic-bezier(.190, 1.000, .220, 1.000) 2.3s;
+            transition: all .3s cubic-bezier(.190, 1.000, .220, 1.000) 2.3s;
+    letter-spacing: -.07em;
 }
 
-h1 span:nth-child(3) {
-  -webkit-animation-delay: 0.2s;
+.before
+{
+    -webkit-transition: all .3s ease-in-out 2s;
+            transition: all .3s ease-in-out 2s;
+    letter-spacing: -.07em;
 }
 
-h1 span:nth-child(4) {
-  -webkit-animation-delay: 0.3s;
+.try
+{
+    -webkit-transition: all .3s ease-in-out 1.7s;
+            transition: all .3s ease-in-out 1.7s;
+    letter-spacing: -.07em;
 }
 
-h1 span:nth-child(5) {
-  -webkit-animation-delay: 0.4s;
+.animate .try
+{
+    font-size: 60px;
+
+    -webkit-transform: scale(1.5,1.5);
+        -ms-transform: scale(1.5,1.5);
+            transform: scale(1.5,1.5);
+
+    opacity: 1;
+
+    filter: alpha(opacity=100);
 }
 
-h1 span:nth-child(6) {
-  -webkit-animation-delay: 0.5s;
+.animate .before
+{
+    font-size: 80px;
+
+    -webkit-transform: scale(1.5,1.5);
+        -ms-transform: scale(1.5,1.5);
+            transform: scale(1.5,1.5);
+
+    opacity: 1;
+
+    filter: alpha(opacity=100);
 }
 
-h1 span:nth-child(7) {
-  -webkit-animation-delay: 0.6s;
-}
+ .animate .you
+{
+    font-size: 100px;
 
-h1 span:nth-child(8) {
-  -webkit-animation-delay: 0.8s;
-}
+    -webkit-transform: scale(1.5,1.5);
+        -ms-transform: scale(1.5,1.5);
+            transform: scale(1.5,1.5);
 
-h1 span:nth-child(9) {
-  -webkit-animation-delay: 0.9s;
-}
+    opacity: 1;
 
-h1 span:nth-child(10) {
-  -webkit-animation-delay: 0.1s;
-}
-
-h1 span:nth-child(11) {
-  -webkit-animation-delay: 0.2s;
-}
-
-h1 span:nth-child(12) {
-  -webkit-animation-delay: 0.3s;
-}
-
-h1 span:nth-child(13) {
-  -webkit-animation-delay: 0.4s;
-}
-
-h1 span:nth-child(14) {
-  -webkit-animation-delay: 0.5s;
-}
-
-/* ANIMATION */
-@-webkit-keyframes bounce {
-  100% {
-    top: -20px;
-    text-shadow: 0 1px 0 #ccc, 0 2px 0 #ccc, 0 3px 0 #ccc, 0 4px 0 #ccc,
-      0 5px 0 #ccc, 0 6px 0 #ccc, 0 7px 0 #ccc, 0 8px 0 #ccc, 0 9px 0 #ccc,
-      0 50px 25px rgba(0, 0, 0, 0.2);
-  }
+    filter: alpha(opacity=100);
 }
