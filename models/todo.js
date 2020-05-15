@@ -3,14 +3,14 @@ module.exports = function(sequelize, DataTypes) {
     title: DataTypes.STRING,
     category: DataTypes.TEXT,
     createdAt: {
-      field: 'created_at',
+      field: "createdAt",
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
   },
-    ETA: DataTypes.DATE,
+    ETC: DataTypes.DATE,
     updatedAt: {
-      field: 'updated_at',
+      field: "updatedAt",
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
