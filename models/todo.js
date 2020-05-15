@@ -14,7 +14,8 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
-  }
+  },
+    completed: DataTypes.BOOLEAN
   });
   return Todos;
 };
