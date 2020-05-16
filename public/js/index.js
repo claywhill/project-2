@@ -63,7 +63,8 @@ var refreshExamples = function() {
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
-
+  alert("Working")
+  $("#title").on("submit").val().trim();
   var example = {
     text: $exampleText.val().trim(),
     description: $exampleDescription.val().trim()
@@ -95,7 +96,7 @@ var handleDeleteBtnClick = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+$("#submitButton").on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
 var hotbod = document.querySelector("body");
