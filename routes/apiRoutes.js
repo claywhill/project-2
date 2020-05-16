@@ -3,6 +3,7 @@ var db = require("../models");
 module.exports = function(app) {
   // Get all todos
   app.get("/api/todos", function(req, res) {
+    console.log("Get todos", req.body);
     db.Todo.findAll({})
     .then(function(dbTodo) {
       res.json(dbTodo);
@@ -35,6 +36,7 @@ module.exports = function(app) {
 
   // Create a new todo
   app.post("/api/todos", function(req, res) {
+    console.log("Post todos", req.body)
     db.Todo.create({
       title: req.body.title,
       category: req.body.category,
