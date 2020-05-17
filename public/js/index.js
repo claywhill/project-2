@@ -1,8 +1,6 @@
 $(document).ready(function() {
   /* global moment */
 
-require(moment)
-
   // todoContainer holds all of our todos
   var todoContainer = $(".todo-container");
   var todoCategorySelect = $("#category");
