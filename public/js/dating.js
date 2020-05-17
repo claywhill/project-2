@@ -1,150 +1,112 @@
-$(document).ready(function() {
-  /* global moment */
+function displayTravel(lat,long) {
 
-  // todoContainer holds all of our todos
-  var todoContainer = $(".todo-container");
-  var todoCategorySelect = $("#category");
+  var search = $(this).attr("data-search");
+
   // Click events for the edit and delete buttons
-  $(document).on("click", "button.delete", handleTodoDelete);
-  $(document).on("click", "button.edit", handleTodoEdit);
-  // Variable to hold our todos
-  var todos;
-
-  // The code below handles the case where we want to get blog todos for a specific Category
-  // Looks for a query param in the url for id
-  var url = window.location.search;
-  var todoId;
-  if (url.indexOf("?id=") !== -1) {
-    todoId = url.split("=")[1];
-    GetTodos(todoId);
-  }
-  // If there's no todoId we just get all todos as usual
-  else {
-    GetTodos();
-  }
-
-  // This function grabs todos from the database and updates the view
-  function GetTodos(category) {
-    todoId = category || "";
-    if (todoId) {
-      todoId = "/?id=" + todoId;
-    }
-    $.get("/api/todos" + todoId, function(data) {
-      console.log("Todos", data);
-      todos = data;
-      if (!todos || !todos.length) {
-        displayEmpty(category);
+  $(".get-travel").on("click", function (event) {
+    event.preventDefault();
+    
+    var settings = {
+      "async": true,
+      "crossDomain": true,
+      "url": "https://tripadvisor1.p.rapidapi.com/hotels/list?" + search + "offset=0&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&nights=2&location_id=293919&adults=1&rooms=1",
+      "method": "GET",
+      "headers": {
+        "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+        "x-rapidapi-key": "781fdf3fcemsh0941f7659dcee8bp1ef9acjsn031795ec154c"
       }
-      else {
-        initializeRows();
-      }
-    });
-  }
-
-  // This function does an API call to delete todos
-  function deleteTodo(id) {
-    $.ajax({
-      method: "DELETE",
-      url: "/api/todos/" + id
-    })
-      .then(function() {
-        GetTodos(todoCategorySelect.val());
-      });
-  }
-
-  // InitializeRows handles appending all of our constructed todo HTML inside todoContainer
-  function initializeRows() {
-    todoContainer.empty();
-    var todosToAdd = [];
-    for (var i = 0; i < todos.length; i++) {
-      todosToAdd.push(createNewRow(todos[i]));
     }
-    todoContainer.append(todosToAdd);
-  }
+    $.ajax(settings).done(function (response) {
+      console.log(response);
 
-  // This function constructs a todo's HTML
-  function createNewRow(todo) {
-    var formattedDate = new Date(todo.createdAt);
-    formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
-    var newTodoCard = $("<div>");
-    newTodoCard.addClass("card");
-    var newTodoCardHeading = $("<div>");
-    newTodoCardHeading.addClass("card-header");
-    var deleteBtn = $("<button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete btn btn-danger");
-    var editBtn = $("<button>");
-    editBtn.text("EDIT");
-    editBtn.addClass("edit btn btn-info");
-    var newTodoTitle = $("<h2>");
-    var newTodoDate = $("<small>");
-    var newTodoCategory = $("<h5>");
-    newTodoCategory.text("Written by: Category name display is in next activity when we learn joins!");
-    newTodoCategory.css({
-      float: "right",
-      color: "blue",
-      "margin-top":
-      "-10px"
-    });
-    var newTodoCardBody = $("<div>");
-    newTodoCardBody.addClass("card-body");
-    var newTodoBody = $("<p>");
-    newTodoTitle.text(todo.title + " ");
-    newTodoBody.text(todo.body);
-    newTodoDate.text(formattedDate);
-    newTodoTitle.append(newTodoDate);
-    newTodoCardHeading.append(deleteBtn);
-    newTodoCardHeading.append(editBtn);
-    newTodoCardHeading.append(newTodoTitle);
-    newTodoCardHeading.append(newTodoCategory);
-    newTodoCardBody.append(newTodoBody);
-    newTodoCard.append(newTodoCardHeading);
-    newTodoCard.append(newTodoCardBody);
-    newTodoCard.data("todo", todo);
-    return newTodoCard;
-  }
-
-  // This function figures out which todo we want to delete and then calls deleteTodo
-  function handleTodoDelete() {
-    var currentTodo = $(this)
-      .parent()
-      .parent()
-      .data("todo");
-    deleteTodo(currentTodo.id);
-  }
-
-  // This function figures out which Todo we want to edit and takes it to the appropriate url
-  function handleTodoEdit() {
-    var currentTodo = $(this)
-      .parent()
-      .parent()
-      .data("todo");
-    window.location.href = "/cms?id=" + currentTodo.id;
-  }
-
-  // This function displays a message when there are no todos
-  function displayEmpty(id) {
-    var query = window.location.search;
-    var partial = "";
-    if (id) {
-      partial = " for Todo #" + id;
-    }
-    todoContainer.empty();
-    var messageH2 = $("<h2>");
-    messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("No todos yet" + partial + ", navigate <a href='/cms" + query +
-    "'>here</a> in order to get started.");
-    todoContainer.append(messageH2);
-  }
-
-  ///adding back logo animation
-  var hotbod = document.querySelector("body");
-
-  function doStuff() {
-    hotbod.className += " animate";
+  });
+  });
 }
+  // // Click events for the edit and delete buttons
+  // $(".get-attractions").on("click", function (event) {
+  //   event.preventDefault();
 
-  doStuff();
+  //   var settings = {
+  //     "async": true,
+  //     "crossDomain": true,
+  //     "url": "https://tripadvisor1.p.rapidapi.com/attractions/get-details?currency=USD&lang=en_US&location_id=1451754",
+  //     "method": "GET",
+  //     "headers": {
+  //       "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+  //       "x-rapidapi-key": "781fdf3fcemsh0941f7659dcee8bp1ef9acjsn031795ec154c"
+  //     }
+  //   }
+    
+  //   $.ajax(settings).done(function (response) {
+  //     console.log(response);
+  //   });
+  
 
-});
 
+//   for (var j = 0; j < 5; j++) {
+//     var brewDiv = $("<div id='brewId'>")
+//     var breweryName = $("<p>").text(result[j].name);
+//     var street = $("<p>").text(result[j].street);
+//     var brewery_type = $("<p>").text("Type: " + result[j].brewery_type);
+//     var phone = $("<p>").text(result[j].phone);
+//     var website_url = $("<a>").text(result[j].website_url);
+//     website_url.attr("href", result[j].website_url);
+//     brewImage = $("<img src=https://www.gannett-cdn.com/-mm-/b2b05a4ab25f4fca0316459e1c7404c537a89702/c=0-0-1365-768/local/-/media/2018/10/09/USATODAY/usatsports/247WallSt.com-247WS-497973-beer-cover-photo-1.jpg?width=660&height=372&fit=crop&format=pjpg&auto=webp>").addClass("brewImage");
+//     brewDiv.append(brewImage);
+//     brewDiv.append(breweryName);
+//     brewDiv.append(street);
+//     brewDiv.append(brewery_type);
+//     brewDiv.append(phone);
+//     brewDiv.append(website_url);
+//     $("#brews-here").prepend(brewDiv);
+
+
+// });
+  // });
+
+
+
+
+//   // Click events for the edit and delete buttons
+//   $(".get-ideas").on("click", function (event) {
+//     event.preventDefault();
+
+//     var queryURL = "http://bucketlist.org/api/"
+
+//       // Performing our AJAX GET request
+//       $.ajax({
+//         url: queryURL,
+//         method: "GET"
+//       }).then(function(response) {
+
+
+//       });
+//   });
+
+
+// function convert(search) {
+//     var mapboxURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + citySearch + ".json?country=us&access_token=pk.eyJ1Ijoic2tpcDExMTMiLCJhIjoiY2s4MjR3Y3p3MHdybTNlcmwxdGlia2Q3MCJ9.LueUgl63OO8XUk6Jh3r46Q"
+//     $.ajax({
+//         url: mapboxURL,
+//         method: "GET"
+//     }).then(function (calling) {
+//         var lat = calling.features[0].center[1];
+//         var long = calling.features[0].center[0];
+//         displayTrails("lat=" + lat, "lon=" + long);
+//     })
+// }
+
+// $("#add-search").on("click", function (event) {
+//     event.preventDefault();
+//     $("#img-here").empty();
+//     $("#brews-here").empty();
+//     var citySearch = $("#input-search").val().trim();
+//     displayBrewery(citySearch);
+//     convert(citySearch);
+// });
+
+
+
+
+
+// });
