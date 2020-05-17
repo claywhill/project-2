@@ -35,9 +35,4 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/dating.html"));
     });
 
-    // route travel.handlebars
-    app.get("/travel", function(req, res) {
-      res.sendFile(path.join(__dirname, "../public/travel.handlebars"));
-    });
-
 };
