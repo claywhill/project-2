@@ -22,7 +22,7 @@ module.exports = function(app) {
   });
 
   // Get route for returning todos of a specific category
-  app.get("/api/totdos/category/:category", function(req, res) {
+  app.get("/api/todos/category/:category", function(req, res) {
     db.Post.findAll({
       where: {
         category: req.params.category
