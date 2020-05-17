@@ -137,4 +137,14 @@ $(document).ready(function() {
     todoContainer.append(messageH2);
   }
 
+  ///adding back logo animation
+  var hotbod = document.querySelector("body");
+
+  function doStuff() {
+    hotbod.className += " animate";
+}
+
+  doStuff();
+
 });
+
