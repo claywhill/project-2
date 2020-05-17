@@ -10,7 +10,7 @@ $(document).ready(function() {
   // Variable to hold our todos
   var todos;
 
-  // The code below handles the case where we want to get blog todos for a specific author
+  // The code below handles the case where we want to get blog todos for a specific Category
   // Looks for a query param in the url for id
   var url = window.location.search;
   var todoId;
@@ -24,8 +24,8 @@ $(document).ready(function() {
   }
 
   // This function grabs todos from the database and updates the view
-  function GetTodos(author) {
-    todoId = author || "";
+  function GetTodos(category) {
+    todoId = category || "";
     if (todoId) {
       todoId = "/?id=" + todoId;
     }
@@ -33,7 +33,7 @@ $(document).ready(function() {
       console.log("Todos", data);
       todos = data;
       if (!todos || !todos.length) {
-        displayEmpty(author);
+        displayEmpty(category);
       }
       else {
         initializeRows();
@@ -78,9 +78,9 @@ $(document).ready(function() {
     editBtn.addClass("edit btn btn-info");
     var newTodoTitle = $("<h2>");
     var newTodoDate = $("<small>");
-    var newTodoAuthor = $("<h5>");
-    newTodoAuthor.text("Written by: Author name display is in next activity when we learn joins!");
-    newTodoAuthor.css({
+    var newTodoCategory = $("<h5>");
+    newTodoCategory.text("Written by: Category name display is in next activity when we learn joins!");
+    newTodoCategory.css({
       float: "right",
       color: "blue",
       "margin-top":
@@ -96,7 +96,7 @@ $(document).ready(function() {
     newTodoCardHeading.append(deleteBtn);
     newTodoCardHeading.append(editBtn);
     newTodoCardHeading.append(newTodoTitle);
-    newTodoCardHeading.append(newTodoAuthor);
+    newTodoCardHeading.append(newTodoCategory);
     newTodoCardBody.append(newTodoBody);
     newTodoCard.append(newTodoCardHeading);
     newTodoCard.append(newTodoCardBody);
