@@ -1,11 +1,11 @@
 function displayTravel(lat,long) {
 
-  var search = $(this).attr("data-search");
-
   // Click events for the edit and delete buttons
-  $(".get-travel").on("click", function (event) {
+  $(".get-travel").on("click", function (event) {  
     event.preventDefault();
     
+    var search = $(this).attr("data-search");
+
     var settings = {
       "async": true,
       "crossDomain": true,
@@ -37,7 +37,6 @@ function displayTravel(lat,long) {
     };
   });
   });
-  displayTravel();
 }
 
   // // Click events for the edit and delete buttons
@@ -122,9 +121,5 @@ function displayTravel(lat,long) {
 //     displayBrewery(citySearch);
 //     convert(citySearch);
 // });
-
-
-
-
 
 // });
