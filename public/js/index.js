@@ -1,110 +1,143 @@
-// Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
 
-// The API object contains methods for each kind of request we'll make
-var API = {
-  saveExample: function(example) {
-    return $.ajax({
-      headers: {
-        "Content-Type": "application/json"
-      },
-      type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
-    });
-  },
-  getExamples: function() {
-    return $.ajax({
-      url: "api/examples",
-      type: "GET"
-    });
-  },
-  deleteExample: function(id) {
-    return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
-    });
+$(document).ready(function() {
+  /* global moment */
+
+require(moment)
+
+  // todoContainer holds all of our todos
+  var todoContainer = $(".todo-container");
+  var todoCategorySelect = $("#category");
+  // Click events for the edit and delete buttons
+  $(document).on("click", "button.delete", handleTodoDelete);
+  $(document).on("click", "button.edit", handleTodoEdit);
+  // Variable to hold our todos
+  var todos;
+
+  // The code below handles the case where we want to get blog todos for a specific author
+  // Looks for a query param in the url for id
+  var url = window.location.search;
+  var todoId;
+  if (url.indexOf("?id=") !== -1) {
+    todoId = url.split("=")[1];
+    GetTodos(todoId);
   }
-};
-
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
-
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
-  alert("Working")
-  $("#title").on("submit").val().trim();
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
-  };
-
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
+  // If there's no todoId we just get all todos as usual
+  else {
+    GetTodos();
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
+  // This function grabs todos from the database and updates the view
+  function GetTodos(author) {
+    todoId = author || "";
+    if (todoId) {
+      todoId = "/?id=" + todoId;
+    }
+    $.get("/api/todos" + todoId, function(data) {
+      console.log("Todos", data);
+      todos = data;
+      if (!todos || !todos.length) {
+        displayEmpty(author);
+      }
+      else {
+        initializeRows();
+      }
+    });
+  }
 
-  $exampleText.val("");
-  $exampleDescription.val("");
-};
+  // This function does an API call to delete todos
+  function deleteTodo(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/todos/" + id
+    })
+      .then(function() {
+        GetTodos(todoCategorySelect.val());
+      });
+  }
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
+  // InitializeRows handles appending all of our constructed todo HTML inside todoContainer
+  function initializeRows() {
+    todoContainer.empty();
+    var todosToAdd = [];
+    for (var i = 0; i < todos.length; i++) {
+      todosToAdd.push(createNewRow(todos[i]));
+    }
+    todoContainer.append(todosToAdd);
+  }
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
-};
+  // This function constructs a todo's HTML
+  function createNewRow(todo) {
+    var formattedDate = new Date(todo.createdAt);
+    formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+    var newTodoCard = $("<div>");
+    newTodoCard.addClass("card");
+    var newTodoCardHeading = $("<div>");
+    newTodoCardHeading.addClass("card-header");
+    var deleteBtn = $("<button>");
+    deleteBtn.text("x");
+    deleteBtn.addClass("delete btn btn-danger");
+    var editBtn = $("<button>");
+    editBtn.text("EDIT");
+    editBtn.addClass("edit btn btn-info");
+    var newTodoTitle = $("<h2>");
+    var newTodoDate = $("<small>");
+    var newTodoAuthor = $("<h5>");
+    newTodoAuthor.text("Written by: Author name display is in next activity when we learn joins!");
+    newTodoAuthor.css({
+      float: "right",
+      color: "blue",
+      "margin-top":
+      "-10px"
+    });
+    var newTodoCardBody = $("<div>");
+    newTodoCardBody.addClass("card-body");
+    var newTodoBody = $("<p>");
+    newTodoTitle.text(todo.title + " ");
+    newTodoBody.text(todo.body);
+    newTodoDate.text(formattedDate);
+    newTodoTitle.append(newTodoDate);
+    newTodoCardHeading.append(deleteBtn);
+    newTodoCardHeading.append(editBtn);
+    newTodoCardHeading.append(newTodoTitle);
+    newTodoCardHeading.append(newTodoAuthor);
+    newTodoCardBody.append(newTodoBody);
+    newTodoCard.append(newTodoCardHeading);
+    newTodoCard.append(newTodoCardBody);
+    newTodoCard.data("todo", todo);
+    return newTodoCard;
+  }
 
-// Add event listeners to the submit and delete buttons
-$("#submitButton").on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+  // This function figures out which todo we want to delete and then calls deleteTodo
+  function handleTodoDelete() {
+    var currentTodo = $(this)
+      .parent()
+      .parent()
+      .data("todo");
+    deleteTodo(currentTodo.id);
+  }
 
-var hotbod = document.querySelector("body");
+  // This function figures out which Todo we want to edit and takes it to the appropriate url
+  function handleTodoEdit() {
+    var currentTodo = $(this)
+      .parent()
+      .parent()
+      .data("todo");
+    window.location.href = "/cms?id=" + currentTodo.id;
+  }
 
-function doStuff() {
-    hotbod.className += " animate";
-}
+  // This function displays a message when there are no todos
+  function displayEmpty(id) {
+    var query = window.location.search;
+    var partial = "";
+    if (id) {
+      partial = " for Todo #" + id;
+    }
+    todoContainer.empty();
+    var messageH2 = $("<h2>");
+    messageH2.css({ "text-align": "center", "margin-top": "50px" });
+    messageH2.html("No todos yet" + partial + ", navigate <a href='/cms" + query +
+    "'>here</a> in order to get started.");
+    todoContainer.append(messageH2);
+  }
 
-window.onload = function() {
-    doStuff();
-};
+});
