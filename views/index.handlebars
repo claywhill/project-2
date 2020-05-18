@@ -88,35 +88,35 @@
       <td>{{completed}}</td>
     </tr>
     {{/each}}
-    <tr>
+    <tr action="/api/todos/:id" method="POST">
       <th scope="row"></th>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-           <td><button type="submit" id="todoU" class="todo">Update</button></td>
-          <td><button type="submit" id="todoD" class="todo">Delete</button></td>
+           <td><button type="submit" id="updateButton" class="todo">Update</button></td>
+          <td><button type="submit" id="deleteButton" class="todo">Delete</button></td>
     </tr>
-    <tr>
+    <tr action="/api/todos/:id" method="POST">
       <th scope="row"></th>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
-      <td><button type="submit" id="todoU" class="todo">Update</button></td>
-          <td><button type="submit" id="todoD" class="todo">Delete</button></td>
+      <td><button type="submit" id="updateButton" class="todo">Update</button></td>
+          <td><button type="submit" id="deleteButton" class="todo">Delete</button></td>
     </tr>
-    <tr>
+    <tr action="/api/todos/:id" method="POST">
       <th scope="row"></th>
       <td></td>
       <td></td>
       <td></td>
       <td></td>
       <td></td> 
-      <td><button type="submit" id="todoU" class="todo">Update</button></td>
-          <td><button type="submit" id="todoD" class="todo">Delete</button></td>
+      <td><button type="submit" id="updateButton" class="todo">Update</button></td>
+          <td><button type="submit" id="deleteButton" class="todo">Delete</button></td>
     </tr>
   </tbody>
 </table>
