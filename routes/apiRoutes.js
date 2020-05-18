@@ -45,7 +45,7 @@ module.exports = function(app) {
     });
   });
 
-  // Delete an todo by id
+  // Delete a todo by id
   app.delete("/api/todos/:id", function(req, res) {
     db.Todo.destroy({
       where: {
