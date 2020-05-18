@@ -77,6 +77,8 @@
       <th scope="col">ETC</th>
       <th scope="col">Updated</th>
       <th scope="col">Completed</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -89,6 +91,8 @@
       <td>{{ETC}}</td>
       <td>{{updatedAt}}</td>
       <td>{{completed}}</td>
+      <td><button class = "editButton" data-id = "{{id}}">Edit</button></td>
+      <td><button class = "toDeleteButton" data-id = "{{id}}">Delete</button></td>
     </tr>
     {{/each}}
   </tbody>

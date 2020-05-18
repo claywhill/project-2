@@ -55,8 +55,8 @@ module.exports = function (app) {
         id: req.params.id
       }
     })
-      .then(function (dbTodo) {
-        res.json(dbTodo);
+      .then(function (todoObject) {
+        res.json(todoObject);
       });
   });
 
