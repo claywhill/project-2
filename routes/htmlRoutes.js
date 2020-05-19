@@ -27,10 +27,10 @@ module.exports = function(app) {
       res.sendFile(path.join(__dirname, "../public/travel.html"));
     });
   
-    // // route dating.html
-    // app.get("./dating", function(req, res) {
-    //   res.sendFile(path.join(__dirname, "../public/dating.html"));
-    // });
+    // route dating.html
+    app.get("/dating", function(req, res) {
+      res.sendFile(path.join(__dirname, "../public/dating.html"));
+    });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
