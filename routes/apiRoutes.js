@@ -24,24 +24,25 @@ module.exports = function (app) {
       });
   });
 
-  // Get route for returning todos of a specific category
-  app.get("/api/todos/category/:category", function (req, res) {
-    db.Post.findAll({
-      where: {
-        category: req.params.category
-      }
-    })
-      .then(function (dbTodo) {
-        res.json(dbTodo);
-      });
-  });
+  // // Get route for returning todos of a specific category
+  // app.get("/api/todos/category/:category", function (req, res) {
+  //   db.Post.findAll({
+  //     where: {
+  //       category: req.params.category
+  //     }
+  //   })
+  //     .then(function (dbTodo) {
+  //       res.json(dbTodo);
+  //     });
+  // });
 
   // Create a new todo
   app.post("/api/todos", function (req, res) {
     db.Todo.create({
       title: req.body.title,
       category: req.body.category,
-      ETC: req.body.ETC
+      ETC: req.body.ETC,
+      completed: req.body.completed
     })
       .then(function (dbTodo) {
         res.redirect("/");
@@ -61,15 +62,16 @@ module.exports = function (app) {
   });
 
   // Update a Todo item
-  app.put("/api/todos", function (req, res) {
+  app.put("/api/todos/:id", function (req, res) {
+    console.log(req.params)
     db.Todo.update(req.body,
       {
         where: {
           id: req.body.id
         }
       })
-      .then(function (dbTodo) {
-        res.json(dbTodo);
+      .then(function (todoObject) {
+        res.json(todoObject);
       });
   });
 };
