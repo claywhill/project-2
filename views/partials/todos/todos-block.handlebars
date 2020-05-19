@@ -1,5 +1,14 @@
-{{title}}
-    <button class="updateTodo" data-id="{{id}}" data-newTodo="{{updated}}">
-        {{#if updated}}Updated{{else}}Return{{/if}}
-    </button>
-    <button id="deleteTodo" class="delete-Todo" data-id="{{this.id}}">Delete</button>
+<div class="col s6">
+	{{#each Todos}}
+	{{#if this.title}}
+	<div>
+		<form action="/api/todos{{this.id}}?_method=CREATE" method="POST">
+			<button type="submit" class="submit-todo" data-id="{{id}}"
+				data-newCreate="{{create}}">
+				{{this.title}}
+			</button>
+		</form>
+	</div>
+	{{/if}}
+	{{/each}}
+</div>
