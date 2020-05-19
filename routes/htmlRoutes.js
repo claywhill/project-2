@@ -1,7 +1,5 @@
 var db = require("../models");
 
-var path = require("path")
-
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
@@ -22,21 +20,19 @@ module.exports = function(app) {
     });
   });
 
-    // route loads travel.html
-    app.get("/travel", function(req, res) {
-      res.sendFile(path.join(__dirname, "../public/travel.html"));
-    });
-  
-    // route dating.html
-    app.get("/dating", function(req, res) {
-      res.sendFile(path.join(__dirname, "../public/dating.html"));
-    });
-
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
   });
 
-
+    // // route loads travel.html
+    // app.get("./travel", function(req, res) {
+    //   res.sendFile(path.join(__dirname, "../public/travel.html"));
+    // });
+  
+    // // route dating.html
+    // app.get("./dating", function(req, res) {
+    //   res.sendFile(path.join(__dirname, "../public/dating.html"));
+    // });
 
 };

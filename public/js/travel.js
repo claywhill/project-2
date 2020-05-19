@@ -1,9 +1,9 @@
-function displayTravel(lat, long) {
+function displayTravel(lat,long) {
 
   // Click events for the edit and delete buttons
-  $(".get-travel").on("click", function (event) {
+  $(".get-travel").on("click", function (event) {  
     event.preventDefault();
-
+    
     var search = $(this).attr("data-search");
 
     var settings = {
@@ -22,20 +22,20 @@ function displayTravel(lat, long) {
       for (var j = 0; j < 5; j++) {
         console.log(response);
 
-        // // Transfer content to HTML
-        // $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-        // $(".wind").text("Wind Speed: " + response.wind.speed);
-        // $(".humidity").text("Humidity: " + response.main.humidity);
-        // $(".temp").text("Temperature (F) " + response.main.temp);
+      // Transfer content to HTML
+      $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+      $(".wind").text("Wind Speed: " + response.wind.speed);
+      $(".humidity").text("Humidity: " + response.main.humidity);
+      $(".temp").text("Temperature (F) " + response.main.temp);
+      
+        // Log the data in the console as well
+        console.log("Wind Speed: " + response.wind.speed);
+        console.log("Humidity: " + response.main.humidity);
+        console.log("Temperature (F): " + response.main.temp);
 
-        // // Log the data in the console as well
-        // console.log("Wind Speed: " + response.wind.speed);
-        // console.log("Humidity: " + response.main.humidity);
-        // console.log("Temperature (F): " + response.main.temp);
 
-
-      };
-    });
+    };
+  });
   });
 }
 
@@ -53,11 +53,11 @@ function displayTravel(lat, long) {
   //       "x-rapidapi-key": "781fdf3fcemsh0941f7659dcee8bp1ef9acjsn031795ec154c"
   //     }
   //   }
-
+    
   //   $.ajax(settings).done(function (response) {
   //     console.log(response);
   //   });
-
+  
 
 
 //   for (var j = 0; j < 5; j++) {
