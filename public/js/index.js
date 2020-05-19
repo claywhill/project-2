@@ -109,7 +109,7 @@ $(document).ready(function () {
   function handleTodoDelete(event) {
     // event.stopPropagation();
     var id = $(this).data("id");
-    console.log("We are here", id, event);
+    console.log("We are here!", id, event);
     $.ajax({
       method: "DELETE",
       url: "/api/todos/" + id
