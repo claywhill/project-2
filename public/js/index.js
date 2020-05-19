@@ -1,12 +1,13 @@
-$(document).ready(function() {
+$(document).ready(function () {
   /* global moment */
 
   // todoContainer holds all of our todos
   var todoContainer = $(".todo-container");
   var todoCategorySelect = $("#category");
   // Click events for the edit and delete buttons
-  $(document).on("click", "button.delete", handleTodoDelete);
-  $(document).on("click", "button.edit", handleTodoEdit);
+  $(".toDeleteButton").on("click", handleTodoDelete);
+  // $(".editButton").on("click", handleTodoEdit);
+  $(".complete").on("click", handleTodoEdit);
   // Variable to hold our todos
   var todos;
 
@@ -29,7 +30,7 @@ $(document).ready(function() {
     if (todoId) {
       todoId = "/?id=" + todoId;
     }
-    $.get("/api/todos" + todoId, function(data) {
+    $.get("/api/todos" + todoId, function (data) {
       console.log("Todos", data);
       todos = data;
       if (!todos || !todos.length) {
@@ -47,7 +48,7 @@ $(document).ready(function() {
       method: "DELETE",
       url: "/api/todos/" + id
     })
-      .then(function() {
+      .then(function () {
         GetTodos(todoCategorySelect.val());
       });
   }
@@ -84,7 +85,7 @@ $(document).ready(function() {
       float: "right",
       color: "blue",
       "margin-top":
-      "-10px"
+        "-10px"
     });
     var newTodoCardBody = $("<div>");
     newTodoCardBody.addClass("card-body");
@@ -105,46 +106,62 @@ $(document).ready(function() {
   }
 
   // This function figures out which todo we want to delete and then calls deleteTodo
-  function handleTodoDelete() {
-    var currentTodo = $(this)
-      .parent()
-      .parent()
-      .data("todo");
-    deleteTodo(currentTodo.id);
+  function handleTodoDelete(event) {
+    // event.stopPropagation();
+    var id = $(this).data("id");
+    console.log("We are here", id, event);
+    $.ajax({
+      method: "DELETE",
+      url: "/api/todos/" + id
+    }).then(function () {
+      location.reload();
+    });
   }
+
+  // function deleteTodo(event) {
+  //   event.stopPropagation();
+  //   var id = $(this).data("id");
+  //   $.ajax({
+  //     method: "DELETE",
+  //     url: "/api/todos/" + id
+  //   }).then(getTodos);
+  // }
 
   // This function figures out which Todo we want to edit and takes it to the appropriate url
-  function handleTodoEdit() {
-    var currentTodo = $(this)
-      .parent()
-      .parent()
-      .data("todo");
-    window.location.href = "/cms?id=" + currentTodo.id;
-  }
+  function handleTodoEdit(event) {
+    console.log("I have been checked")
+    var id = $(this).data("id");
+    console.log("this is the edit", id, event);
+    $.ajax({
+      method: "PUT",
+      url: "/api/todos/" + id
+    }).then(function () {
+      location.reload();
+    });
+  };
 
   // This function displays a message when there are no todos
-  function displayEmpty(id) {
-    var query = window.location.search;
-    var partial = "";
-    if (id) {
-      partial = " for Todo #" + id;
-    }
-    todoContainer.empty();
-    var messageH2 = $("<h2>");
-    messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("No todos yet" + partial + ", navigate <a href='/cms" + query +
-    "'>here</a> in order to get started.");
-    todoContainer.append(messageH2);
-  }
+  // function displayEmpty(id) {
+  //   var query = window.location.search;
+  //   var partial = "";
+  //   if (id) {
+  //     partial = " for Todo #" + id;
+  //   }
+  //   todoContainer.empty();
+  //   var messageH2 = $("<h2>");
+  //   messageH2.css({ "text-align": "center", "margin-top": "50px" });
+  //   messageH2.html("No todos yet" + partial + ", navigate <a href='/cms" + query +
+  //     "'>here</a> in order to get started.");
+  //   todoContainer.append(messageH2);
+  // }
 
   ///adding back logo animation
   var hotbod = document.querySelector("body");
 
   function doStuff() {
     hotbod.className += " animate";
-}
+  }
 
   doStuff();
 
 });
-
