@@ -20,23 +20,21 @@ module.exports = function(app) {
         todo: todo
       });
     });
-  });
 
     // route loads travel.html
     app.get("/travel", function(req, res) {
-      res.sendFile(path.join(__dirname, "../public/travel.html"));
+      res.sendFile(path.join(__dirname, "../public/travel.handlebars"));
     });
   
-    // // route dating.html
-    // app.get("./dating", function(req, res) {
-    //   res.sendFile(path.join(__dirname, "../public/dating.html"));
-    // });
+    // route dating.html
+    app.get("/dating", function(req, res) {
+      res.sendFile(path.join(__dirname, "../public/dating.handlebars"));
+    });
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
     res.render("404");
   });
-
-
+  });
 
 };
