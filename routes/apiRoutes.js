@@ -61,15 +61,15 @@ module.exports = function (app) {
   });
 
   // Update a Todo item
-  app.put("/api/todos/:id", function (req, res) {
+  app.put("/api/todos", function (req, res) {
     db.Todo.update(req.body,
       {
         where: {
           id: req.body.id
         }
       })
-      .then(function (todoObject) {
-        res.json(todoObject);
+      .then(function (dbTodo) {
+        res.json(dbTodo);
       });
   });
 };
