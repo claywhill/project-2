@@ -36,6 +36,8 @@
                   <input type="text" id="title" name="title" placeholder="Enter a todo">
                   <label for="category"></label>
                   <input type="text" id="category" name="category" placeholder="Select a category">
+                  <label for="ETC"></label>
+                  <input type="text" id="category" name="ETC" placeholder="ET Completion">
                 </div>
                 <br>
                 <button type="submit" id="todo" class="todo">Create</button>
@@ -90,9 +92,10 @@
       <td>{{createdAt}}</td>
       <td>{{ETC}}</td>
       <td>{{updatedAt}}</td>
-      <td>{{completed}}</td>
-      <td><button class = "editButton" data-id = "{{id}}">Edit</button></td>
-      <td><button class = "toDeleteButton" data-id = "{{id}}">Delete</button></td>
+      <td><input type="checkbox" class="complete" value="BOOLEAN" name="completed" data-id="{{id}}"
+          {{#if completed}}checked{{/if}}></td>
+      <td><button class="editButton" data-id="{{id}}">Edit</button></td>
+      <td><button class="toDeleteButton" data-id="{{id}}">Delete</button></td>
     </tr>
     {{/each}}
   </tbody>
