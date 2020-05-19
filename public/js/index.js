@@ -5,8 +5,8 @@ $(document).ready(function() {
   var todoContainer = $(".todo-container");
   var todoCategorySelect = $("#category");
   // Click events for the edit and delete buttons
-  $(document).on("click", "button.delete", handleTodoDelete);
-  $(document).on("click", "button.edit", handleTodoEdit);
+  $(".toDeleteButton").on("click", handleTodoDelete);
+  $( ".editButton").on("click", handleTodoEdit);
   // Variable to hold our todos
   var todos;
 
@@ -105,13 +105,26 @@ $(document).ready(function() {
   }
 
   // This function figures out which todo we want to delete and then calls deleteTodo
-  function handleTodoDelete() {
-    var currentTodo = $(this)
-      .parent()
-      .parent()
-      .data("todo");
-    deleteTodo(currentTodo.id);
+  function handleTodoDelete(event) {
+    // event.stopPropagation();
+    var id = $(this).data("id");
+    console.log("We are here", id, event);
+    $.ajax({
+      method: "DELETE",
+      url: "/api/todos/" + id
+    }).then(function() {
+      location.reload();
+    });
   }
+
+  // function deleteTodo(event) {
+  //   event.stopPropagation();
+  //   var id = $(this).data("id");
+  //   $.ajax({
+  //     method: "DELETE",
+  //     url: "/api/todos/" + id
+  //   }).then(getTodos);
+  // }
 
   // This function figures out which Todo we want to edit and takes it to the appropriate url
   function handleTodoEdit() {
