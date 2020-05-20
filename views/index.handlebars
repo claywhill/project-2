@@ -30,7 +30,7 @@
                  <div class="col s6 text-center">
               <h3>Create a new bucket list item</h3>
               </p>
-       <form class="todo-form" action="api/todos" method="POST"></form>
+       <form class="todo-form" action="api/todos" method="POST">
           <div>
             <label for="title"></label>
             <input type="text" id="title" name="title" placeholder="Enter a todo">
@@ -82,7 +82,7 @@
       <th scope="col">Title </th>
       <th scope="col">Category</th>
       <th scope="col">Created</th>
-      <th scope="col">ETC</th>
+      <th scope="col">Due Date</th>
       <th scope="col">Updated</th>
       <th scope="col">Completed</th>
       <th scope="col">Edit</th>
@@ -92,12 +92,12 @@
   <tbody>
     {{#each todos}}
     <tr>
-          <td>{{id}}</td>
+      <td>{{id}}</td>
       <td>{{title}}</td>
       <td>{{category}}</td>
-      <td>{{createdAt}}</td>
-      <td>{{ETC}}</td>
-      <td>{{updatedAt}}</td>
+      <td>{{formatDate createdAt "MM/DD/YYYY"}}</td>
+      <td>{{formatDate ETC "MM/DD/YYYY"}}</td>
+      <td>{{formatDate updatedAt "MM/DD/YYYY"}}</td>
            <td><input type="checkbox" class="complete" value="BOOLEAN" data-completed={{completed}} name="completed"
           data-id="{{id}}" {{#if completed}}checked{{/if}}></td>
       <td><button class="editButton" data-id="{{id}}">Edit</button></td>

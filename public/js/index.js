@@ -8,6 +8,7 @@ $(document).ready(function () {
   $(".toDeleteButton").on("click", handleTodoDelete);
   // $(".editButton").on("click", handleTodoEdit);
   $(".complete").on("click", handleTodoEdit);
+
   // Variable to hold our todos
   var todos;
 
@@ -31,7 +32,6 @@ $(document).ready(function () {
       todoId = "/?id=" + todoId;
     }
     $.get("/api/todos" + todoId, function (data) {
-      console.log("Todos", data);
       todos = data;
       if (!todos || !todos.length) {
         displayEmpty(category);
