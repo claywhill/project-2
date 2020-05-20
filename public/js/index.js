@@ -42,17 +42,6 @@ $(document).ready(function () {
     });
   }
 
-  // This function does an API call to delete todos
-  function deleteTodo(id) {
-    $.ajax({
-      method: "DELETE",
-      url: "/api/todos/" + id
-    })
-      .then(function () {
-        GetTodos(todoCategorySelect.val());
-      });
-  }
-
   // InitializeRows handles appending all of our constructed todo HTML inside todoContainer
   function initializeRows() {
     todoContainer.empty();
@@ -118,42 +107,19 @@ $(document).ready(function () {
     });
   }
 
-  // function deleteTodo(event) {
-  //   event.stopPropagation();
-  //   var id = $(this).data("id");
-  //   $.ajax({
-  //     method: "DELETE",
-  //     url: "/api/todos/" + id
-  //   }).then(getTodos);
-  // }
-
-  // This function figures out which Todo we want to edit and takes it to the appropriate url
-  function handleTodoEdit(event) {
-    console.log("I have been checked")
-    var id = $(this).data("id");
-    console.log("this is the edit", id, event);
-    $.ajax({
-      method: "PUT",
-      url: "/api/todos/" + id
-    }).then(function () {
-      location.reload();
-    });
-  };
-
-  // This function displays a message when there are no todos
-  // function displayEmpty(id) {
-  //   var query = window.location.search;
-  //   var partial = "";
-  //   if (id) {
-  //     partial = " for Todo #" + id;
-  //   }
-  //   todoContainer.empty();
-  //   var messageH2 = $("<h2>");
-  //   messageH2.css({ "text-align": "center", "margin-top": "50px" });
-  //   messageH2.html("No todos yet" + partial + ", navigate <a href='/cms" + query +
-  //     "'>here</a> in order to get started.");
-  //   todoContainer.append(messageH2);
-  // }
+  	// This function figures out which Todo we want to edit and takes it to the appropriate url
+	function handleTodoEdit() {
+		var id = $(this).data('id');
+		var completed = $(this).data('completed');
+		console.log('this is the things' + id + completed);
+		$.ajax({
+			method: 'PUT',
+			url: '/api/todos/' + id,
+			data: { completed },
+		}).then(function() {
+			location.reload();
+		});
+	}
 
   ///adding back logo animation
   var hotbod = document.querySelector("body");
