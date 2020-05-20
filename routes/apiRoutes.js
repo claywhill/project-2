@@ -24,18 +24,6 @@ module.exports = function (app) {
       });
   });
 
-  // // Get route for returning todos of a specific category
-  // app.get("/api/todos/category/:category", function (req, res) {
-  //   db.Post.findAll({
-  //     where: {
-  //       category: req.params.category
-  //     }
-  //   })
-  //     .then(function (dbTodo) {
-  //       res.json(dbTodo);
-  //     });
-  // });
-
   // Create a new todo
   app.post("/api/todos", function (req, res) {
     db.Todo.create({
@@ -62,16 +50,19 @@ module.exports = function (app) {
   });
 
   // Update a Todo item
-  app.put("/api/todos/:id", function (req, res) {
-    console.log(req.params)
-    db.Todo.update(req.body,
-      {
-        where: {
-          id: req.body.id
-        }
-      })
-      .then(function (todoObject) {
-        res.json(todoObject);
+	app.put('/api/todos/:id', function(req, res) {
+		console.log('Is there anybody out there?!');
+		console.log(typeof req.body.completed);
+		console.log(req.params.id);
+		db.Todo.update(
+			{ completed: req.body.completed === 'false' ? 1 : 0 },
+			{
+				where: {
+					id: req.params.id,
+				},
+			}
+		).then(function(todoObject) {
+			res.json(todoObject);
       });
   });
 };
