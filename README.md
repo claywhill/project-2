@@ -59,9 +59,7 @@ npm  i dotenv
 ```
 npm  i mysql2
 ```
-```
-npm  i mysql2
-```
+
 *** Also for your own environment please update config.js with your mysql database connection info. When going live create a .env file.
 
 ## Shout outs:
