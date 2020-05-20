@@ -1,10 +1,12 @@
-function displayTravel(lat, long) {
+$(document).ready({
+
+
 
   // Click events for the edit and delete buttons
-  $(".get-travel").on("click", function (event) {
+  $(".submitTravel").on("click", function (event) {
     event.preventDefault();
 
-    var search = $(this).attr("data-search");
+ var search = $("#location").val().trim();
 
     var settings = {
       "async": true,
@@ -36,7 +38,7 @@ function displayTravel(lat, long) {
 
       };
     });
-  });
+
 }
 
   // // Click events for the edit and delete buttons
