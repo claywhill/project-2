@@ -5,9 +5,20 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     db.Todo.findAll({})
       .then(function (dbTodo) {
+        // let newTodo = {
+        //   id: dbTodo.id,
+        //   title: dbTodo.title,
+        //   category: dbTodo.category,
+        //   createdAt: dbTodo.createdAt,
+        //   ETC: dbTodo.ETC,
+        //   updatedAt: dbTodo.updatedAt,
+        //   completed: dbTodo.completed
+        // }
         var todoObject = {
           todos: dbTodo
         };
+        console.log(dbTodo);
+               
         res.render("index", todoObject);
       });
   });
@@ -26,6 +37,7 @@ module.exports = function (app) {
 
   // Create a new todo
   app.post("/api/todos", function (req, res) {
+    console.log("Post route activated")
     db.Todo.create({
       title: req.body.title,
       category: req.body.category,
