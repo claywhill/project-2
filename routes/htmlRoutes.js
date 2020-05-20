@@ -1,7 +1,6 @@
 var db = require("../models");
 
 var path = require("path")
-require("dotenv").config();
 
 module.exports = function(app) {
   // Load index page
