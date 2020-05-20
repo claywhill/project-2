@@ -1,45 +1,39 @@
-$(document).ready({
+$(document).ready(function(){
 
 
 
   // Click events for the edit and delete buttons
-  $(".submitTravel").on("click", function (event) {
-    event.preventDefault();
+//   $(".submitTravel").on("click", function (event) {
+//     event.preventDefault();
 
- var search = $("#location").val().trim();
+//  var search = $("#location").val().trim();
 
-    var settings = {
-      "async": true,
-      "crossDomain": true,
-      "url": "https://tripadvisor1.p.rapidapi.com/hotels/list?" + search + "offset=0&currency=USD&limit=30&order=asc&lang=en_US&sort=recommended&nights=2&location_id=293919&adults=1&rooms=1",
-      "method": "GET",
-      "headers": {
-        "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-        "x-rapidapi-key": "781fdf3fcemsh0941f7659dcee8bp1ef9acjsn031795ec154c"
-      }
-    }
-    $.ajax(settings).then(function (response) {
-      console.log(response);
+ var settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://tripadvisor1.p.rapidapi.com/attractions/list-by-latlng?lunit=km&currency=USD&limit=30&distance=5&lang=en_US&longitude=100.87808&latitude=12.91285",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
+		"x-rapidapi-key": "781fdf3fcemsh0941f7659dcee8bp1ef9acjsn031795ec154c"
+	}
+}
+$.ajax(settings).done(function (response) {
+	console.log(response);
 
-      for (var j = 0; j < 5; j++) {
+
+      for (var i = 0; i < 5; i++) {
         console.log(response);
 
-        // // Transfer content to HTML
-        // $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-        // $(".wind").text("Wind Speed: " + response.wind.speed);
-        // $(".humidity").text("Humidity: " + response.main.humidity);
-        // $(".temp").text("Temperature (F) " + response.main.temp);
-
-        // // Log the data in the console as well
-        // console.log("Wind Speed: " + response.wind.speed);
-        // console.log("Humidity: " + response.main.humidity);
-        // console.log("Temperature (F): " + response.main.temp);
+        // Transfer content to HTML
+        $(".name").text("Name: " + response.data[i].name);
+        $(".photo").text("Photo: " + response.data[i].photo.images.thumbnail);
 
 
       };
     });
 
-}
+})
 
   // // Click events for the edit and delete buttons
   // $(".get-attractions").on("click", function (event) {
