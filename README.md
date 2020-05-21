@@ -7,9 +7,13 @@ Git Hub Repository: https://github.com/claywhill/project-2.git
 
 
 ## Created By:
+
 Tammy Richardson
+
 Kamy Leeret
+
 Clay Hill
+
 Mike Rodriguez
 
 ## Description: 
