@@ -5,15 +5,7 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     db.Todo.findAll({})
       .then(function (dbTodo) {
-        // let newTodo = {
-        //   id: dbTodo.id,
-        //   title: dbTodo.title,
-        //   category: dbTodo.category,
-        //   createdAt: dbTodo.createdAt,
-        //   ETC: dbTodo.ETC,
-        //   updatedAt: dbTodo.updatedAt,
-        //   completed: dbTodo.completed
-        // }
+
         var todoObject = {
           todos: dbTodo
         };
