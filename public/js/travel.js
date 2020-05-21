@@ -67,38 +67,36 @@ $(document).ready(function () {
           });
         };
 
+      //   function displayMeetup(lat, long) {
 
-
-        function displayMeetup(lat, long) {
-
-          var settings = {
-            "url": "https://api.meetup.com/find/locations/?&sign=true&photo-host=public&" + long + "&" + lat,
-            "method": "GET",
-            "timeout": 0,
-          };
-          $.ajax(settings).done(function (response) {
-            console.log(response);
+      //     var settings = {
+      //       "url": "https://api.meetup.com/find/locations/?&sign=true&photo-host=public&" + long + "&" + lat,
+      //       "method": "GET",
+      //       "timeout": 0,
+      //     };
+      //     $.ajax(settings).done(function (response) {
+      //       console.log(response);
               
-            var meetupDiv = $(".meetups")
-            for (var i = 0; i < 5; i++) {
+      //       var meetupDiv = $(".meetups")
+      //       for (var i = 0; i < 5; i++) {
               
-              var meetupCategoryDiv = $("<div id='meetupCategoryDiv'>")
+      //         var meetupCategoryDiv = $("<div id='meetupCategoryDiv'>")
               
-              var meetupDetailsDiv = $("<div id='meetupDetailsDiv'>")
-              // var restaurantImg = $("<img>").addClass("attraction-img");
-              // restaurantImg.attr("src", response.data[i].photo.images.small.url);
-              var name = $("<p>").text(response.data[i].name);
-              var address = $("<p>").text(response.data[i].address);
+      //         var meetupDetailsDiv = $("<div id='meetupDetailsDiv'>")
+      //         // var restaurantImg = $("<img>").addClass("attraction-img");
+      //         // restaurantImg.attr("src", response.data[i].photo.images.small.url);
+      //         var name = $("<p>").text(response.data[i].name);
+      //         var address = $("<p>").text(response.data[i].address);
         
-              meetupDiv.append(meetupCategoryDiv);
-                  meetupCategoryDiv.append(name);
-                  meetupCategoryDiv.append(meetupDetailsDiv);
-                        meetupDetailsDiv.append(address);
-                         meetupDetailsDiv.append(name);
-                        // restDetailsDiv.append(attractionImg);
-                  }
-        });
-      };
+      //         meetupDiv.append(meetupCategoryDiv);
+      //             meetupCategoryDiv.append(name);
+      //             meetupCategoryDiv.append(meetupDetailsDiv);
+      //                   meetupDetailsDiv.append(address);
+      //                    meetupDetailsDiv.append(name);
+      //                   // restDetailsDiv.append(attractionImg);
+      //             }
+      //   });
+      // };
 
       function convert(search) {
       var mapboxURL = "https://api.mapbox.com/geocoding/v5/mapbox.places/" + search + ".json?country=us&access_token=pk.eyJ1Ijoic2tpcDExMTMiLCJhIjoiY2s4MjR3Y3p3MHdybTNlcmwxdGlia2Q3MCJ9.LueUgl63OO8XUk6Jh3r46Q"
