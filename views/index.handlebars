@@ -1,78 +1,72 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-<div class="row">
-  <div class="col-md-2">
-    <img id="left" src=".\styles\img\skull.jpg" alt="carpe-diem">
+    <div class="row">
+      <div class="col-md-2">
+        <img id="left" src=".\styles\img\skull.jpg" alt="carpe-diem">
+      </div>
+      <div id="logo" class="col-md-8">
+        <div class="TBYD-container">
+          <div class="TBYD">
+            <span class="try">Try</span><span class="before">Before</span><span class="you">YOU</span>
+          </div>
+          <div class="die">DIE!!!</div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <img id="right" src=".\styles\img\skull.jpg" alt="dare">
+      </div>
+    </div>
   </div>
-  <div id="logo" class="col-md-8">
-    <div class="TBYD-container">  
-  <div class="TBYD">
-    <span class="try">Try</span><span class="before">Before</span><span class="you">YOU</span>
-  </div>
-  <div class="die">DIE!!!</div>
 </div>
-  </div>
-  <div class="col-md-2">
-    <img id="right" src=".\styles\img\skull.jpg" alt="dare">
-  </div>
-</div>
-
-</div>
-</div>
-
 <div class="container">
   <div class="row row-cols-6">
     <div class="col">
-        <div class="card text-center">
-          <div class="card-body">
-            <div class="row">
-              <p class="card-text">
-                 <div class="col s6 text-center">
+      <div class="card text-center">
+        <div class="card-body">
+          <div class="row">
+            <p class="card-text">
+            <div class="col s6 text-center">
               <h3>Create a new bucket list item</h3>
               </p>
-       <form class="todo-form" action="api/todos" method="POST">
-          <div>
-            <label for="title"></label>
-            <input type="text" id="title" name="title" placeholder="Enter a todo">
-            <label for="category"></label>
-            <input type="text" id="category" name="category" placeholder="Enter a category">
-            <br>
-            <br>
+              <form class="todo-form" action="api/todos" method="POST">
+                <div>
+                  <label for="title"></label>
+                  <input type="text" id="title" name="title" placeholder="Enter a todo">
+                  <label for="category"></label>
+                  <input type="text" id="category" name="category" placeholder="Enter a category">
+                  <br>
+                  <br>
 
-            <label for="ETC"></label>
-            <input type="text" id="endDate" name="ETC" placeholder="Choose end date">   
-                    </div>
-          <br>
-          <button type="submit" id="todo" class="todo">Create</button>
+                  <label for="ETC"></label>
+                  <input type="text" id="endDate" name="ETC" placeholder="Choose end date">
+                </div>
+                <br>
+                <button type="submit" id="todo" class="todo">Create</button>
               </form>
-              </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
     <div class="col">
-        <div class="card text-center">
-          <div class="card-body">
-            <div class="row">
-              <p class="card-text">
-                 <div class="col s6 text-center">
-              <h3>Plan before it's to late!!!!</h3>
+      <div class="card text-center">
+        <div class="card-body">
+          <div class="row">
+            <p class="card-text">
+            <div class="col s6 text-center">
+              <h3>Plan before it's too late!!!!</h3>
               </p>
-              
-                <a href="/travel" ><button type="submit" id="get-travel" class="api">Travel</button></a>
-                <a href="/dating"></a><button type="submit" id="dating" class="api">Dating</button></a>  
-          <div>
-   
-		</div>
-	</footer>
-          </div>
+              <a href="/travel"><button type="submit" id="get-travel" class="api">Travel</button></a>
+              <div>
               </div>
+              </footer>
             </div>
           </div>
         </div>
-        </div>
-    
+      </div>
+    </div>
   </div>
+</div>
 </div>
 
 <table class="table table-striped table-dark">
@@ -85,7 +79,6 @@
       <th scope="col">Due Date</th>
       <th scope="col">Updated</th>
       <th scope="col">Completed</th>
-      <th scope="col">Edit</th>
       <th scope="col">Delete</th>
     </tr>
   </thead>
@@ -98,20 +91,18 @@
       <td>{{formatDate createdAt "MM/DD/YYYY"}}</td>
       <td>{{formatDate ETC "MM/DD/YYYY"}}</td>
       <td>{{formatDate updatedAt "MM/DD/YYYY"}}</td>
-           <td><input type="checkbox" class="complete" value="BOOLEAN" data-completed={{completed}} name="completed"
+      <td><input type="checkbox" class="complete" value="BOOLEAN" data-completed={{completed}} name="completed"
           data-id="{{id}}" {{#if completed}}checked{{/if}}></td>
-      <td><button class="editButton" data-id="{{id}}">Edit</button></td>
       <td><button class="toDeleteButton" data-id="{{id}}">Delete</button></td>
     </tr>
     {{/each}}
- 
+
   </tbody>
 </table>
-     
+
 </div>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 <script src="/js/travel.js"></script>
-<script src="/js/dating.js"></script>
