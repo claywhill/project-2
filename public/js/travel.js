@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
         $(".submitTravel").on("click", function (event) {
           event.preventDefault();
           var search = $("#location").val().trim();
@@ -18,14 +19,16 @@ $(document).ready(function () {
           }
           $.ajax(settings).done(function (response) {
             console.log(response);
-            var attractionDiv = $(".attractions")
-                for (var i = 0; i < 5; i++) {
+
+              var attractionDiv = $(".attractions")
+  
+                  for (var i = 0; i < 5; i++) {
+                      var detailsDiv = $("<div>")
                   
-                  var detailsDiv = $("<div id='detailsDiv'>")
                   // var attractionImg = $("<img>").addClass("attraction-img");
                   // attractionImg.attr("src", response.data[i].photo.images.thumbnail.url);
                   var name = $("<p>").text(response.data[i].name);
-                  detailsDiv.append(name);
+                      detailsDiv.append(name);
                   // detailsDiv.append(attractionImg);
                   attractionDiv.append(detailsDiv);
                 };
@@ -47,6 +50,7 @@ $(document).ready(function () {
             console.log(response);
 
             var restaurantDiv = $(".restaurants")
+
               for (var i = 0; i < 5; i++) {
                 
                 var restCategoryDiv = $("<div id='restCategoryDiv'>")
@@ -108,7 +112,7 @@ $(document).ready(function () {
         var long = calling.features[0].center[0];
         displayAttractions("latitude=" + lat, "longitude=" + long);
         displayRestaurants("latitude=" + lat, "longitude=" + long);
-        displayMeetup("lat=" + lat, "ion=" + long);
+  //       displayMeetup("lat=" + lat, "ion=" + long);
       })
     }
   });
