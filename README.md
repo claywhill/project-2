@@ -15,7 +15,7 @@ Mike Rodriguez
 ## Description: 
 "Try Before You Die!!!" app allows you to create and manage a list of things you would like to do before you die, a bucket list. Recent events in life have changed everything so now is the best time to start listing out what you would like ot get out of life before you are unable to. Create an item, assign a category, set a realistic time frame to complete the item and mark as complete when accomplished. If the item is no longer relevant you can either edit the item or deleted it altogether. 
 
-To assist you in making this item come true we have provided some helpful links to get you started. Most of the high priority items fall under "Travel" and "Dating", there will be more to come in the next release so we look forward to your feedback. 
+To assist you in making this item come true we have provided some helpful links to get you started. Most of the high priority items fall under "Travel", there will be more to come in the next release so we look forward to your feedback. 
 
 
 ## Getting Started:
@@ -32,7 +32,7 @@ To assist you in making this item come true we have provided some helpful links 
 
 **Use the delete button to remove the list item entirely.
 
-As mentioned in the description, to assist making each item more of a reality we have included a few helpful buttons to get you going. Currently "Travel" and "Dating" are avaiable. 
+As mentioned in the description, to assist making each item more of a reality we have included a few helpful buttons to get you going. Currently "Travel" and "Meetups" are avaiable. 
 
 ## Future Release items:
 -sort the table by ascending or descending order. 
@@ -40,12 +40,15 @@ As mentioned in the description, to assist making each item more of a reality we
 -countdown timer so you know how much time is left. 
 
 ## Technology used:
-Bootstrap, Express, MySQL, Handlebars, Day.JS, Node, Javascript, Jquery, API's (for additional information for each task)
+Bootstrap (front end), Express (back end), MySQL(back end), Handlebars (Back end push to front), Node, Javascript, Jquery, API's, HTML, CSS (for additional information for each task)
 
 ## For Developers:
 Installations needed when pulling this into a dev environment:
 ```
 npm i express
+```
+```
+npm i express-cli
 ```
 ```
 npm i express-handlebars
